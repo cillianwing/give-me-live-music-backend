@@ -36,6 +36,7 @@ class ApplicationController < ActionController::API
         JWT::DecodeError
         []
       end
+    end
   end
 
 end
