@@ -7,9 +7,9 @@ class Api::V1::UsersController < ApplicationController
       user.save 
       payload = {user_id: user.id}
       token = encode_token(payload)
-      render json: {user: user, jwt: token}
+      render json: {user: user, jwt: token, success: "Welcome, #{user.first_name}"}
     else
-      render json: {errors: user.errors.full_messages}, status: :not_acceptable
+      render json: {failure: user.errors.full_messages, jwt: ''}
     end
   end
 
