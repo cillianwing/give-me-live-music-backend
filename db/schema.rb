@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_26_010522) do
+ActiveRecord::Schema.define(version: 2020_02_26_011335) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,6 +33,15 @@ ActiveRecord::Schema.define(version: 2020_02_26_010522) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "follows", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "venue_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_follows_on_user_id"
+    t.index ["venue_id"], name: "index_follows_on_venue_id"
+  end
+
   create_table "tickets", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "concert_id", null: false
@@ -53,6 +62,20 @@ ActiveRecord::Schema.define(version: 2020_02_26_010522) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "venues", force: :cascade do |t|
+    t.text "name"
+    t.text "city"
+    t.text "state"
+    t.text "street"
+    t.text "url"
+    t.text "description"
+    t.integer "api_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  add_foreign_key "follows", "users"
+  add_foreign_key "follows", "venues"
   add_foreign_key "tickets", "concerts"
   add_foreign_key "tickets", "users"
 end
