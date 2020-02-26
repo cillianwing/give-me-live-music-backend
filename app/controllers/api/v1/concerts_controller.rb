@@ -28,7 +28,7 @@ class Api::V1::ConcertsController < ApplicationController
   def upcoming 
     final_url = upcoming_search(params["search"])
     resp = Faraday.get(final_url)
-    resp_json = JSON.parse(resp.body)["resultsPage"]["results"]
+    resp_json = JSON.parse(resp.body)["resultsPage"]
     render json: resp_json
   end
 
