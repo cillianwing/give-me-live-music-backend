@@ -1,0 +1,31 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  display: MyText
+  type: MyText
+  url: MyText
+  venue_id: 1
+  venue_name: MyText
+  location_name: MyText
+  location_lat: 9.99
+  location_long: 9.99
+  start_date: MyText
+  start_time: MyText
+  headline: MyText
+  support: MyText
+  api_id: 1
+
+two:
+  display: MyText
+  type: MyText
+  url: MyText
+  venue_id: 1
+  venue_name: MyText
+  location_name: MyText
+  location_lat: 9.99
+  location_long: 9.99
+  start_date: MyText
+  start_time: MyText
+  headline: MyText
+  support: MyText
+  api_id: 1

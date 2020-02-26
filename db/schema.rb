@@ -10,10 +10,37 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_23_191512) do
+ActiveRecord::Schema.define(version: 2020_02_26_010522) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "concerts", force: :cascade do |t|
+    t.text "display"
+    t.text "type"
+    t.text "url"
+    t.integer "venue_id"
+    t.text "venue_name"
+    t.text "location"
+    t.decimal "location_lat"
+    t.decimal "location_long"
+    t.text "date"
+    t.text "time"
+    t.text "headline", default: [], array: true
+    t.text "support", default: [], array: true
+    t.integer "api_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "tickets", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "concert_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["concert_id"], name: "index_tickets_on_concert_id"
+    t.index ["user_id"], name: "index_tickets_on_user_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email"
@@ -26,4 +53,6 @@ ActiveRecord::Schema.define(version: 2020_02_23_191512) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "tickets", "concerts"
+  add_foreign_key "tickets", "users"
 end
