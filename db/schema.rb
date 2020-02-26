@@ -21,9 +21,6 @@ ActiveRecord::Schema.define(version: 2020_02_26_021519) do
     t.text "url"
     t.integer "venue_id"
     t.text "venue_name"
-    t.text "location"
-    t.decimal "location_lat"
-    t.decimal "location_long"
     t.text "date"
     t.text "time"
     t.text "headline", default: [], array: true
@@ -31,6 +28,8 @@ ActiveRecord::Schema.define(version: 2020_02_26_021519) do
     t.integer "api_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.text "city"
+    t.text "state"
   end
 
   create_table "follows", force: :cascade do |t|
