@@ -41,7 +41,7 @@ class Api::V1::ConcertsController < ApplicationController
   private
 
   def concert_params
-    params.require(:concert).permit(:display, :type, :url, :venue_id, :venue_name, :location, :location_lat, :location_long, :date, :time, :headline, :support, :api_id)
+    params.require(:concert).permit(:display, :type, :url, :venue_id, :venue_name, :city, :state, :date, :time, :headline, :support, :api_id)
   end
 
 
