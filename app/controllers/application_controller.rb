@@ -39,4 +39,19 @@ class ApplicationController < ActionController::API
     end
   end
 
+  def upcoming_search(input)
+    location_url = "https://api.songkick.com/api/3.0/search/locations.json?query=#{input['city']}, #{input['city']}, US&apikey=#{ENV['SONGKICK_API_KEY']}"
+    location_resp = Faraday.get(location_url)
+    location_json = JSON.parse(location_resp.body)
+    metro_area = location_json["resultsPage"]["results"]["location"][0]["metroArea"]["id"]
+
+    base_url = "https://api.songkick.com/api/3.0/events.json?apikey=#{ENV['SONGKICK_API_KEY']}"
+    location = "&location=sk:#{metro_area}"
+    min_date = "&min_date=#{input["min_date"]}"
+    max_date = "&max_date=#{input["max_date"]}"
+    page = "&page=#{input["page"]}"
+
+    final_url = "#{base_url}#{location}#{min_date}#{max_date}#{page}"
+  end
+
 end

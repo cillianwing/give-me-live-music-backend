@@ -25,18 +25,12 @@ class Api::V1::ConcertsController < ApplicationController
   #   concert.destroy 
   # end
 
-  # def upcoming 
-  #   base_url = "http://api.eventful.com/json/events/search?app_key=#{ENV['EVENTFUL_API_KEY']}"
-  #   location_string = !params["search"]["location"].empty? ? "&location=#{params["search"]["location"]}" : ''
-  #   date_string = !params["search"]["date"].empty? ? "&date=#{params["search"]["date"]}" : ''
-  #   within_string = !params["search"]["within"].empty? ? "&within=#{params["search"]["within"]}&units=mi" : ''
-  #   page_string = !params["search"]["page_number"].empty? ? "&page_number=#{params["search"]["page_number"]}" : ''
-  #   final_url = "#{base_url}#{location_string}#{date_string}&category=music#{within_string}&page_size=30#{page_string}"
-    
-  #   resp = Faraday.get(final_url)
-  #   resp_json = JSON.parse(resp.body)
-  #   render json: resp_json
-  # end
+  def upcoming 
+    final_url = upcoming_search(params["search"])
+    resp = Faraday.get(final_url)
+    resp_json = JSON.parse(resp.body)["resultsPage"]["results"]
+    render json: resp_json
+  end
 
   private
 
