@@ -1,19 +1,22 @@
 class Api::V1::ConcertsController < ApplicationController
   before_action :require_login
   
-  # def index
-  #   concerts = session_user.concerts 
-  #   render json: concerts.to_json()
-  # end
+  def index
+    concerts = session_user.concerts 
+    if concerts
+      render json: {concerts: concerts, success: "All concerts pulled successfully."}
+    else
+      render json: {failure: concerts.errors.full_messages}
+    end
+  end
 
   # def show
   #   concert = Concert.find(params[:id])
   # end
 
   def create 
-    concert = session_user.concerts.new(concert_params)
-    if concert.valid?
-      concert.save
+    if session_user.concerts.create(concert_params)
+      concert = session_user.concerts.last 
       render json: {concert: concert, success: "Concert successfully added to your calendar!"}
     else
       render json: {failure: concert.errors.full_messages}
