@@ -11,7 +11,6 @@ class Api::V1::ConcertsController < ApplicationController
   # end
 
   def create 
-    binding.pry
     concert = session_user.concerts.new(concert_params)
     if concert.valid?
       concert.save
