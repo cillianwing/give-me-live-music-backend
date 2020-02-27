@@ -3,9 +3,9 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       post '/concerts/upcoming', to: 'concerts#upcoming'
-      resource :users do
-        resource :concerts
-        resource :venues
+      resources :users do
+        resources :concerts
+        resources :venues
       end
       post "/login", to: "auth#login"
   		get "/auto_login", to: "auth#auto_login"
