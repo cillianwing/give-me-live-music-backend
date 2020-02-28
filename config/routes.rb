@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       post '/concerts/upcoming', to: 'concerts#upcoming'
+      post '/concerts/details', to: 'concerts#details'
       resources :users do
         resources :concerts
         resources :venues
