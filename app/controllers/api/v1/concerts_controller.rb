@@ -15,6 +15,7 @@ class Api::V1::ConcertsController < ApplicationController
   # end
 
   def create 
+    binding.pry
     if session_user.concerts.create(concert_params)
       concert = session_user.concerts.last 
       render json: {concert: concert, success: "Concert successfully added to your calendar!"}
@@ -43,7 +44,7 @@ class Api::V1::ConcertsController < ApplicationController
   private
 
   def concert_params
-    params.require(:concert).permit(:display, :type, :url, :venue_id, :venue_name, :city, :state, :date, :time,:api_id, :headline => [], :support => [])
+    params.require(:concert).permit(:display, :event_type, :url, :venue_id, :venue_name, :city, :state, :date, :time,:api_id, :headline => [], :support => [])
   end
 
 end
