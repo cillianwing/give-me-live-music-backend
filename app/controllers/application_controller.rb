@@ -55,7 +55,7 @@ class ApplicationController < ActionController::API
   end
 
   def concert_detail(input)
-    detail_url = "https://api.songkick.com/api/3.0/events/#{input['api_id']}.json?apikey=#{ENV['SONGKICK_API_KEY']}"
+    detail_url = "https://api.songkick.com/api/3.0/events/#{input}.json?apikey=#{ENV['SONGKICK_API_KEY']}"
   end
 
 end
