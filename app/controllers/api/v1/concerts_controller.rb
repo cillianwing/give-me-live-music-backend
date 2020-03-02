@@ -28,10 +28,14 @@ class Api::V1::ConcertsController < ApplicationController
   #   concert.update(concert_params)
   # end
 
-  # def destroy 
-  #   concert = Concert.find(params[:id])
-  #   concert.destroy 
-  # end
+  def destroy
+    ticket = Ticket.find_by(concert_id: params[:id], user_id: session_user[:id])
+    if ticket.destroy 
+      render json: {success: "Successfully deleted concert from your calendar."}
+    else
+      render json: {failure: "Unable to delete concert from your calendar."}
+    end
+  end
 
   def upcoming 
     final_url = upcoming_search(params["search"])
