@@ -13,6 +13,15 @@ class Api::V1::UsersController < ApplicationController
     end
   end
 
+  def update 
+    user = User.find(params[:id])
+    if user.update(user_params)
+      render json: {user: user, success: "Successfully updated user profile!"}
+    else
+      render json: {failure: user.errors.full_messages}
+    end
+  end
+
   private
 
   def user_params 
